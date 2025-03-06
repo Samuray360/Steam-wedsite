@@ -6,15 +6,12 @@ def main(page: ft.Page):
     page.window.height = 1200
     page.window.width = 1200
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    img = ft.Image(
-        src="",  
-        width=300,  
-        height=200,  
-        fit=ft.ImageFit.CONTAIN  
-    )
+    page.vertical_alignment = ft.MainAxisAlignment.START
+
+   
 
     about_view = ft.Container(
+       
         bgcolor="black",
         content=ft.Text("About Us: Here is some information."),
         visible=False,
@@ -22,20 +19,37 @@ def main(page: ft.Page):
         width=800,
         height=800
     )
-    def home_function(about_view):
+
+    home_view=ft.Container(
+    #    img
+            
+    )
+    pay_way=ft.Container(
+        # card=ft.Column(control=[
+        # # card_number,
+        # # owner_name,
+        # # due_date,
+        # ])
+    ) 
+
+    def home_function(e):
         about_view.visible=False
-        page.update
-    def about_us_function(about_view):
+        home_view=True
+        page.update()
+    def about_us_function(e):
+        home_view=False
         about_view.visible=True
-        page.update
-    def donate_function():
+        page.update()
+    def donate_function(e):
 
-        page.update
+        page.update()
 
-
-    home_button=ft.ElevatedButton(text="Home",on_click=home_function)
-    donate_button=ft.ElevatedButton(text="Donate",on_click=donate_function)
-    about_button=ft.ElevatedButton(text="About",on_click=about_us_function)
+    card_number=ft.TextField,
+    owner_name=ft.TextField,
+    due_date=ft.TextField,
+    home_button=ft.ElevatedButton(text="Home",on_click=home_function,bgcolor="")
+    donate_button=ft.ElevatedButton(text="Donate",on_click=donate_function,bgcolor="")
+    about_button=ft.ElevatedButton(text="About",on_click=about_us_function,bgcolor="")
 
     button_row = ft.Row(
         controls=[
@@ -52,11 +66,13 @@ def main(page: ft.Page):
         content=button_row,  
         bgcolor="blue",
         padding=10, 
-        width=page.width, 
-        alignment=ft.alignment.top_right
+        width=page.width,
+        alignment=ft.alignment.top_center
     )
-
-    page.add(button_container,img,about_view)
+    stack = ft.Stack(
+        controls=[home_view,about_view,pay_way]
+    )
+    page.add(button_container,stack)
     page.update()
 
 ft.app(target=main)
