@@ -2,7 +2,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "3-D Helpers"
-    page.bgcolor = "white"
+    page.bgcolor = "#FFFFFF"
     page.window.height = 1200
     page.window.width = 1200
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -47,9 +47,9 @@ def main(page: ft.Page):
     card_number=ft.TextField,
     owner_name=ft.TextField,
     due_date=ft.TextField,
-    home_button=ft.ElevatedButton(text="Home",on_click=home_function,bgcolor="")
-    donate_button=ft.ElevatedButton(text="Donate",on_click=donate_function,bgcolor="")
-    about_button=ft.ElevatedButton(text="About",on_click=about_us_function,bgcolor="")
+    home_button=ft.ElevatedButton(text="Home",on_click=home_function,bgcolor="4093DF")
+    donate_button=ft.ElevatedButton(text="Donate",on_click=donate_function,bgcolor="4093DF")
+    about_button=ft.ElevatedButton(text="About",on_click=about_us_function,bgcolor="4093DF")
 
     button_row = ft.Row(
         controls=[
@@ -63,9 +63,14 @@ def main(page: ft.Page):
     
   
     button_container = ft.Container(
+        # logo=ft.Image(
+        #     src="C:\Users\ethan\OneDrive\Desktop\Java\Steam-wedsite\Screenshot 2025-03-10 141247.png"  ,
+        #     width=20,
+        #     height=20,
+        # ),
         content=button_row,  
-        bgcolor="blue",
-        padding=10, 
+        bgcolor="#4093DF",
+        padding=20, 
         width=page.width,
         alignment=ft.alignment.top_center
     )
