@@ -3,10 +3,11 @@ import flet as ft
 def main(page: ft.Page):
     page.title = "3-D Helpers"
     page.bgcolor = "#FFFFFF"
-    page.window.height = 1200
-    page.window.width = 1200
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.START
+    # page.window.frameless = True
+    page.spacing = 0
+    page.padding = 0
 
    
     logo=ft.Image(
@@ -19,7 +20,7 @@ def main(page: ft.Page):
     img = ft.Image(
         src="Home.jpg",
         width=page.width,
-        height=page.height,
+        height=page.height  ,
     )
     about_view = ft.Container(
        
@@ -78,7 +79,6 @@ def main(page: ft.Page):
      
         content=button_row,  
         bgcolor="#175ABF",
-        # padding=20, 
         width=page.width,
         alignment=ft.alignment.top_center
     )
@@ -88,5 +88,5 @@ def main(page: ft.Page):
     page.add(button_container,stack)
     page.update()
 
-ft.app(target=main)
+ft.app(target=main,)
 
