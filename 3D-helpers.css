@@ -102,3 +102,6 @@ nav a:hover {
 .reverse {
     flex-direction: row-reverse;
 }
+.info{
+    width: 100%;
+}

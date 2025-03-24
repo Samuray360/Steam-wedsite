@@ -54,6 +54,3 @@ const images = [
     alert("Donation Successful! Thank you for your support.");
 }
 
-function scrollToForm() {
-  document.getElementById("donationForm").scrollIntoView({ behavior: "smooth" });
-}
