@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Helpers</title>
-    <link rel="stylesheet" href="3D-helpers.css">
+    <link rel="stylesheet" href="donation.css">
 </head>
 <body>
-
     <header>
         <div class="logo">3D <span>Helpers</span></div>
         <nav>
@@ -16,6 +15,27 @@
             <a href="Donate.html">Donate</a>
         </nav>
     </header>
+
+</head>
+<body>
+    <div class="container">
+        <p>Help our Cause by Donating!</p>
+        <form id="donationForm">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="lastName" placeholder="Last Name" required>
+            <input type="text" id="cvv" placeholder="CVV" required>
+            <input type="text" id="cardNumber" placeholder="Credit Card Number" required>
+            <button type="button" onclick="submitDonation()">Donate</button>
+        </form>
+        <div class="payment-icons">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
 
 </body>

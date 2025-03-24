@@ -5,7 +5,7 @@
     font-family: Arial, sans-serif;
 }
 
-/* ======= HEADER (Encabezado Fijo) ======= */
+
 header {
     width: 100%;
     height: 70px;
@@ -62,7 +62,7 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* ======= HERO SECTION ======= */
+
 .hero {
     width: 100%;
     height: 100vh;
@@ -70,7 +70,7 @@ nav a:hover {
     padding-top: 70px;
 }
 
-/* ======= SECCIÓN CON IMÁGENES Y TEXTO ======= */
+
 .content {
     padding: 50px;
     background: white;

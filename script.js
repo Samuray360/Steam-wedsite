@@ -28,4 +28,32 @@ const images = [
     const galleryImage = document.getElementById('gallery-image');
     galleryImage.src = images[currentImageIndex];
   }
-  
+
+
+  function submitDonation() {
+    const name = document.getElementById("name").value;
+    const lastName = document.getElementById("lastName").value;
+    const cvv = document.getElementById("cvv").value;
+    const cardNumber = document.getElementById("cardNumber").value;
+
+    if (!name || !lastName || !cvv || !cardNumber) {
+        alert("Please fill out all fields.");
+        return;
+    }
+
+    if (!/^[0-9]{3,4}$/.test(cvv)) {
+        alert("Invalid CVV. It should be 3 or 4 digits.");
+        return;
+    }
+
+    if (!/^[0-9]{16}$/.test(cardNumber)) {
+        alert("Invalid Credit Card Number. It should be 16 digits.");
+        return;
+    }
+
+    alert("Donation Successful! Thank you for your support.");
+}
+
+function scrollToForm() {
+  document.getElementById("donationForm").scrollIntoView({ behavior: "smooth" });
+}
