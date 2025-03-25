@@ -64,3 +64,34 @@ nav a {
 nav a:hover {
     text-decoration: underline;
 }
+
+.content {
+    padding: 50px;
+    background: white;
+    
+}
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.row img {
+    width: 250px;
+    margin-left:100px ;
+    border-radius: 10px;
+    float: right;
+    
+}
+
+.row p {
+    max-width: 600px;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 1.6;
+}
+.reverse {
+    flex-direction: row-reverse;
+}

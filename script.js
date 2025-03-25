@@ -1,56 +1,30 @@
-// Array of image sources
-const images = [
-    'image1.jpg',
-    'image2.jpg',
-    'image3.jpg',
-    'image4.jpg'
-  ];
-  
-  // Initialize the current image index
-  let currentImageIndex = 0;
-  
-  // Function to change the displayed image
-  function changeImage(direction) {
-    // Change the index based on direction
-    if (direction === 'next') {
-      currentImageIndex++;
-      if (currentImageIndex >= images.length) {
-        currentImageIndex = 0;  // Loop back to the first image
-      }
-    } else if (direction === 'previous') {
-      currentImageIndex--;
-      if (currentImageIndex < 0) {
-        currentImageIndex = images.length - 1;  // Loop back to the last image
-      }
-    }
-  
-    // Update the image source based on the new index
-    const galleryImage = document.getElementById('gallery-image');
-    galleryImage.src = images[currentImageIndex];
+function submitDonation() {
+  const name = document.getElementById("name").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const cardNumber = document.getElementById("cardNumber").value.trim();
+  const cvv = document.getElementById("cvv").value.trim();
+  const amount = document.getElementById("amount").value.trim();
+
+  if (!name || !lastName || !cardNumber || !cvv || !amount) {
+      alert("Please fill out all fields.");
+      return;
   }
 
+  if (!/^\d{16}$/.test(cardNumber)) {
+      alert("Invalid Credit Card Number. It should be 16 digits.");
+      return;
+  }
 
-  function submitDonation() {
-    const name = document.getElementById("name").value;
-    const lastName = document.getElementById("lastName").value;
-    const cvv = document.getElementById("cvv").value;
-    const cardNumber = document.getElementById("cardNumber").value;
+  if (!/^\d{3,4}$/.test(cvv)) {
+      alert("Invalid CVV. It should be 3 or 4 digits.");
+      return;
+  }
 
-    if (!name || !lastName || !cvv || !cardNumber) {
-        alert("Please fill out all fields.");
-        return;
-    }
+  if (isNaN(amount) || amount <= 0) {
+      alert("Please enter a valid donation amount greater than 0.");
+      return;
+  }
 
-    if (!/^[0-9]{3,4}$/.test(cvv)) {
-        alert("Invalid CVV. It should be 3 or 4 digits.");
-        return;
-    }
-
-    if (!/^[0-9]{16}$/.test(cardNumber)) {
-        alert("Invalid Credit Card Number. It should be 16 digits.");
-        return;
-    }
-
-    alert("Donation Successful! Thank you for your support.");
+  alert(`Thank you for your generous donation of $${amount}, ${name}!`);
 }
 
