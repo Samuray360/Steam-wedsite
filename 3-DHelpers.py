@@ -5,10 +5,8 @@ def main(page: ft.Page):
     page.bgcolor = "#FFFFFF"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.START
-    
     page.spacing = 0
     page.padding = 0
-
     card_number=ft.TextField()
     owner_name=ft.TextField()
     due_date=ft.TextField()
@@ -32,10 +30,9 @@ def main(page: ft.Page):
 
     about_view = ft.Container(
         content=ft.Row(about_us_info,about_us_img),
-        visible=False,
-        # padding=20,
         width=page.width,
-        height=page.height
+        height=page.height,
+        visible=False
     )
 
     home_view=ft.Container(
@@ -55,10 +52,8 @@ def main(page: ft.Page):
     
     Donation.alignment=ft.alignment.center
 
-    pay_way=ft.Stack(controls=[Donation,Donation_img])
+    pay_way=ft.Stack(controls=[Donation,Donation_img],visible=False)
  
-        
-     
 
 
     def home_function(e):
@@ -98,6 +93,7 @@ def main(page: ft.Page):
         width=page.width,
         alignment=ft.alignment.top_center
     )
+
     stack = ft.Stack(
         controls=[about_view,pay_way,home_view]
     )
