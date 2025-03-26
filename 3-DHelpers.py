@@ -5,7 +5,7 @@ def main(page: ft.Page):
     page.bgcolor = "#FFFFFF"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.START
-    # page.window.frameless = True
+    
     page.spacing = 0
     page.padding = 0
 
@@ -14,16 +14,19 @@ def main(page: ft.Page):
     due_date=ft.TextField()
    
     logo=ft.Image(
-            src="Logo.png" ,
+            src="Logo(home).png" ,
             width=120,
             height=80,
-        )
+    )
     
-    about_us_info=ft.Text(ft.Text("About us\n"
+    about_us_info = ft.Text(
+    "About us\n"
     "We are 3D Helpers, an initiative that combines technology and solidarity to create a meaningful impact. Our project integrates graphic design, robotics, and software development to raise awareness \n"
-                       "about child poverty in the Dominican Republic. Through our platform, anyone can contribute by making donations, which are directed to aid institutions and the production of 3D-printed models.\n"
-                        "As a token of appreciation, each donor receives a 3D-printed car, symbolizing the drive toward a better future. With this effort, we aim not only to alleviate poverty but also to inspire more people to be part of the change.")),
-                        
+    "about child poverty in the Dominican Republic. Through our platform, anyone can contribute by making donations, which are directed to aid institutions and the production of 3D-printed models.\n"
+    "As a token of appreciation, each donor receives a 3D-printed car, symbolizing the drive toward a better future. With this effort, we aim not only to alleviate poverty but also to inspire more people to be part of the change.",
+    text_align=ft.TextAlign.CENTER,  
+    width=600,  
+    )
     about_us_img=ft.Image(src="about_us.png")
 
 
@@ -96,7 +99,7 @@ def main(page: ft.Page):
         alignment=ft.alignment.top_center
     )
     stack = ft.Stack(
-        controls=[home_view,about_view,pay_way]
+        controls=[about_view,pay_way,home_view]
     )
     page.add(search_bar,stack)
     page.update()
