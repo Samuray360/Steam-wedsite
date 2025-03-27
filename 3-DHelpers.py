@@ -5,142 +5,164 @@ def main(page: ft.Page):
     page.bgcolor = "#FFFFFF"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.START
-    page.spacing = 0
     page.padding = 0
 
-    # Input Fields
-    card_number = ft.TextField(label="Card Number")
-    owner_name = ft.TextField(label="Owner Name")
-    due_date = ft.TextField(label="Due Date")
+    # Variables from Code 1
+    logo = ft.Image(src="C:/Users/PC/Documents/GitHub/Steam-wedsite/logo(home).png", width=120, height=80)
+    donation_img = ft.Image(src="Donation_img.png", width=1900, height=950)
+    card_number = ft.TextField(label="Card Number",color="black")
+    owner_name = ft.TextField(label="Owner Name",color="black")
+    due_date = ft.TextField(label="Due Date",color="black")
+    bg_image = ft.Image(src="Join_bg.png", fit=ft.ImageFit.COVER, expand=True, height=600)
+    logo_text = ft.Text("3D Helpers", size=24, color="white", weight=ft.FontWeight.BOLD)
+    donate_text = ft.Text("Donate now!", size=48, color="white", weight=ft.FontWeight.BOLD)
 
+    # Home View Components from Code 2
+    title_section = ft.Text("Our Work", size=24, weight=ft.FontWeight.BOLD,color="black")
+    description_text = ft.Text(
+        "At 3D Helpers, we use technology and design to transform generosity into action.",
+        size=16,color="black"
+    )
+    key_areas = ft.Column([
+        ft.Text("• Graphic Design - We create visually engaging designs.",color="black"),
+        ft.Text("• Robotics & 3D Printing - Using 3D printing for impact.",color="black"),
+        ft.Text("• Software Development - An online platform for change.",color="black")
+    ])
+
+    # Combined Top and Middle Sections
+    top_section = ft.Row(
+        controls=[
+            ft.Image(src="child_mask.png", width=200, height=200,),
+            ft.Text("Help us make a difference", size=20,color="black")
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        spacing=20
+    )
     
-    logo = ft.Image(
-    src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/logo(home).png",
-    width=120,
-    height=80,
-)
-
-   
-    bg_image = ft.Image(
-        src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/Join_bg.png",
-        fit=ft.ImageFit.COVER,
-        width=page.width,
-        height=600
+    middle_section = ft.Row(
+        controls=[
+            ft.Text("Join our mission to create positive change", size=20,color="black"),
+            ft.Image(src="handshake_icon.png", width=200, height=200)
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        spacing=20
     )
 
-    logo_text = ft.Text(
-        "3D Helpers",
-        size=24,
-        color="white",
-        weight=ft.FontWeight.BOLD
-    )
+    # Gallery from Code 2
+    gallery_images = ft.Row([
+        ft.Image(src="gallery1.png", width=150, height=150),
+        ft.Image(src="gallery2.png", width=150, height=150),
+        ft.Image(src="gallery3.png", width=150, height=150)
+    ], alignment=ft.MainAxisAlignment.CENTER, spacing=10)
 
-    # Donate Now Text
-    donate_text = ft.Text(
-        "Donate now!",
-        size=48,
-        color="white",
-        weight=ft.FontWeight.BOLD
-    )
-   
-    # Donate Function
-    def donate_function(e):
-        pay_way.visible = True
-        home_view.visible = False
-        about_view.visible = False
-        page.update()
-
-    # Join Us Button
+    # Join Section from Code 1
     join_button = ft.ElevatedButton(
         "Join us",
         bgcolor="#6495ED",
         color="white",
         width=120,
         height=40,
-        style=ft.ButtonStyle(
-            shape=ft.RoundedRectangleBorder(radius=20)
-        ),
-        on_click=donate_function
+        style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=20))
     )
-
-    # Join Section
     join_section = ft.Container(
-        content=ft.Stack(
-            [
-                bg_image,
-                ft.Column(
-                    [
-                        logo_text,
-                        donate_text,
-                        join_button,
-                    ],
-                    
-                )
-            ]
-        )
+        content=ft.Stack([
+            bg_image,
+            ft.Column([
+                logo_text,
+                donate_text,
+                join_button,
+            ], alignment=ft.MainAxisAlignment.CENTER)
+        ])
     )
 
-    # About Us Image
-    about_us_img = ft.Image(src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/about_us.png")
-    about_view = ft.Container(visible=False)
-
-   
-    home_view = ft.Container(
-        content=ft.Column(
-            controls=[ft.Image(src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/Home.png", width=1900, height=950), join_section]
-        ),
+    # Quote Section (shared between both)
+    quote_section = ft.Container(
+        content=ft.Column([
+            ft.Text(
+                "\"The purpose of ideals, are to be able to shape them to make a change\"",
+                size=20,
+                italic=True,
+                color="white"
+            ),
+            ft.Text("- Ethan Tamarez", size=16, color="white")
+        ], alignment=ft.MainAxisAlignment.CENTER),
+        bgcolor="#6495ED",
+        padding=20,
         alignment=ft.alignment.center
     )
 
-    # Donation Form
-    Donation_img = ft.Image(src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/Donation_img.png")
-
-    Donation = ft.Container(
-        content=ft.Column(controls=[card_number, owner_name, due_date]),
-        bgcolor="#FFFFFF"
-    )
-    pay_way = ft.Stack(controls=[Donation, Donation_img], visible=False)
-    # Page Navigation Functions
-    def home_function(e):
-        about_view.visible = False
-        Donation.visible = False
-        home_view.visible = True
-        page.update()
-
-    def about_us_function(e):
-        home_view.visible = False
-        pay_way.visible = False
-        about_view.visible = True
-        page.update()
-
-    # Navigation Buttons
-    home_button = ft.ElevatedButton(
-        text="Home", on_click=home_function,
-        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.Colors.WHITE)
-    )
-
-    donate_button = ft.ElevatedButton(
-        text="Donate", on_click=donate_function,
-        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.Colors.WHITE)
-    )
-
-    about_button = ft.ElevatedButton(
-        text="About", on_click=about_us_function,
-        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.Colors.WHITE)
-    )
-
-    # Navigation Bar
-    button_row = ft.Row(controls=[home_button, about_button, donate_button])
-    search_bar = ft.Container(
-        content=ft.Row(controls=[logo, button_row], spacing=950),
+    # Footer from Code 2
+    footer_section = ft.Container(
+        content=ft.Column([
+            ft.Text("TALK TO US", size=16, weight=ft.FontWeight.BOLD),
+            ft.Text("(04) 2365 9855 | info@3dhelpers.com"),
+            ft.Row([
+                ft.Text("@3dHelpersRD"),
+                ft.Text("3D Helpers")
+            ])
+        ], alignment=ft.MainAxisAlignment.CENTER),
         bgcolor="#175ABF",
-        width=page.width,
-        alignment=ft.alignment.top_center
+        padding=20
     )
 
-    # Page Content Stack
-    stack = ft.Stack(controls=[about_view, pay_way, home_view])
-    page.add(search_bar, stack)
+    # Views
+    home_view = ft.Container(content=ft.Column([
+        title_section,
+        description_text,
+        key_areas,
+        top_section,
+        middle_section,
+        gallery_images,
+        join_section,
+        quote_section,
+        footer_section
+    ]), visible=True)
+
+    about_view = ft.Container(content=ft.Image(src="about_us.png"), visible=False)
+
+    # Donation Form from Code 1
+    donation_form = ft.Container(
+        content=ft.Column([card_number, owner_name, due_date]),
+        bgcolor="#FFFFFF",
+        width=600,
+        height=800
+    )
+    donate_view = ft.Stack([donation_form, donation_img], visible=False)
+
+    # Navigation Functions
+    def show_home(e):
+        home_view.visible = True
+        about_view.visible = False
+        donate_view.visible = False
+        page.update()
+
+    def show_about(e):
+        home_view.visible = False
+        about_view.visible = True
+        donate_view.visible = False
+        page.update()
+
+    def show_donate(e):
+        home_view.visible = False
+        about_view.visible = False
+        donate_view.visible = True
+        page.update()
+
+    # Navigation Bar with Logo from Code 1
+    nav_buttons = ft.Row([
+        ft.ElevatedButton("Home", on_click=show_home, style=ft.ButtonStyle(bgcolor="#175ABF", color="white")),
+        ft.ElevatedButton("About", on_click=show_about, style=ft.ButtonStyle(bgcolor="#175ABF", color="white")),
+        ft.ElevatedButton("Donate", on_click=show_donate, style=ft.ButtonStyle(bgcolor="#175ABF", color="white"))
+    ])
+    nav_bar = ft.Container(
+        content=ft.Row([logo, nav_buttons], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+        bgcolor="#175ABF",
+        padding=10
+    )
+
+    # Page Assembly
+    stack = ft.Stack([home_view, about_view, donate_view])
+    page.add(nav_bar, stack)
     page.update()
 
-ft.app(target=main,view=ft.WEB_BROWSER)
+ft.app(target=main, view=ft.WEB_BROWSER)
