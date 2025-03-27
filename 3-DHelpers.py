@@ -13,22 +13,21 @@ def main(page: ft.Page):
     owner_name = ft.TextField(label="Owner Name")
     due_date = ft.TextField(label="Due Date")
 
-    # Logo
+    
     logo = ft.Image(
-        src="Logo(home).png",
-        width=120,
-        height=80,
-    )
+    src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/logo(home).png",
+    width=120,
+    height=80,
+)
 
-    # Background Image
+   
     bg_image = ft.Image(
-        src="image.png",
+        src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/Join_bg.png",
         fit=ft.ImageFit.COVER,
         width=page.width,
-        height=page.height
+        height=600
     )
 
-    # Logo Text
     logo_text = ft.Text(
         "3D Helpers",
         size=24,
@@ -43,7 +42,7 @@ def main(page: ft.Page):
         color="white",
         weight=ft.FontWeight.BOLD
     )
-
+   
     # Donate Function
     def donate_function(e):
         pay_way.visible = True
@@ -75,37 +74,36 @@ def main(page: ft.Page):
                         donate_text,
                         join_button,
                     ],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                    
                 )
             ]
         )
     )
 
     # About Us Image
-    about_us_img = ft.Image(src="about_us.png")
+    about_us_img = ft.Image(src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/about_us.png")
     about_view = ft.Container(visible=False)
 
-    # Home View
+   
     home_view = ft.Container(
         content=ft.Column(
-            controls=[ft.Image(src="Home.png", width=1900, height=950), join_section]
+            controls=[ft.Image(src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/Home.png", width=1900, height=950), join_section]
         ),
         alignment=ft.alignment.center
     )
 
     # Donation Form
-    Donation_img = ft.Image(src="Donation_img.png")
+    Donation_img = ft.Image(src="C:/Users/ethan/OneDrive/Desktop/Java/Steam-wedsite/Donation_img.png")
+
     Donation = ft.Container(
         content=ft.Column(controls=[card_number, owner_name, due_date]),
         bgcolor="#FFFFFF"
     )
     pay_way = ft.Stack(controls=[Donation, Donation_img], visible=False)
-
     # Page Navigation Functions
     def home_function(e):
         about_view.visible = False
-        pay_way.visible = False
+        Donation.visible = False
         home_view.visible = True
         page.update()
 
@@ -118,17 +116,17 @@ def main(page: ft.Page):
     # Navigation Buttons
     home_button = ft.ElevatedButton(
         text="Home", on_click=home_function,
-        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.colors.WHITE)
+        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.Colors.WHITE)
     )
 
     donate_button = ft.ElevatedButton(
         text="Donate", on_click=donate_function,
-        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.colors.WHITE)
+        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.Colors.WHITE)
     )
 
     about_button = ft.ElevatedButton(
         text="About", on_click=about_us_function,
-        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.colors.WHITE)
+        style=ft.ButtonStyle(bgcolor="#175ABF", color=ft.Colors.WHITE)
     )
 
     # Navigation Bar
