@@ -145,7 +145,7 @@ def main(page: ft.Page):
     )
 
     # Views
-    home_view = ft.Container(content=ft.Column(controls=[
+    home_view = ft.Container(content=ft.ListView(controls=[
         
         home_bg,
         top_section,
@@ -155,12 +155,13 @@ def main(page: ft.Page):
         description_text,
         key_areas,
         # gallery_pick,
-        
         footer_section
         
-    ],alignment=ft.MainAxisAlignment.START), visible=True)
+    ], ) ,  
+        expand=True,visible=True,height=600)
 
-    about_view = ft.Container(content=ft.Column([about_section,about_Goal,join_section]), visible=False)
+    about_view = ft.Container(content=ft.ListView([about_section,about_Goal,join_section],),  
+        expand=True,visible=False, height=600)
 
     # Donation Form from Code 1
     def validate_credit_card(card_number: str) -> bool:
@@ -304,7 +305,8 @@ def main(page: ft.Page):
     height=550,  # Increased height to accommodate feedback
     alignment=ft.alignment.center
 )
-    donate_view = ft.Stack([ donation_img,donation_form], visible=False)
+    donate_view = ft.Stack([ donation_img,donation_form],  
+        expand=True, visible=False)
 
     # Navigation Functions
     def show_home(e):
