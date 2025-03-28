@@ -22,7 +22,10 @@ def main(page: ft.Page):
     logo_text = ft.Text("3D Helpers", size=24, color="white", weight=ft.FontWeight.BOLD)
     donate_text = ft.Text("Donate now!", size=48, color="white", weight=ft.FontWeight.BOLD)
     home_bg=ft.Image(src="Home.png",width=1900,height=950,)
-
+    insta_img=ft.Image(src="insta.png",width=80, height=40)
+    face_img=ft.Image(src="Facebook.png",width=80, height=40)
+    img_index=1
+    gallery_img=ft.Image(src="diseño1.png",width=120, height=80)
     # Home View Components from Code 2
     title_section = ft.Text("Our Work", size=24, weight=ft.FontWeight.BOLD,color="black")
     description_text = ft.Text(
@@ -84,16 +87,37 @@ def main(page: ft.Page):
     ])
     
     # Gallery from Code 2
-    def gallery_images():
-        gallery= ft.Row([
-        ft.Image(src="Diseño1.png", width=150, height=150),
-        ft.Image(src="Diseño2.png", width=150, height=150),
-        ft.Image(src="Diseño3.png", width=150, height=150),
-        ft.Image(src="Diseño4.png", width=150, height=150),
-        ], alignment=ft.MainAxisAlignment.CENTER, spacing=10)
-        return gallery
+    def gallery_images(img_index,gallery_img):
+        if img_index <0:
+            img_index=5
+        if img_index > 5:
+            img_index=1
+            match img_index:
+                case 1:
+                    gallery_img=ft.Image(src="diseño1.png",width=120, height=80)
+                    page.update()
+                    return
+                case 2:
+                    gallery_img=ft.Image(src="Diseño2.png",width=120, height=80)
+                    page.update()
+                    return
+                case 3:
+                    gallery_img=ft.Image(src="Diseño3.png",width=120, height=80)
+                    page.update()
+                    return
+                case 4:  
+                    gallery_img=ft.Image(src="Diseño4.png",width=120, height=80)
+                    page.update()
+                    return
+                case 5:
+                    gallery_img=ft.Image(src="Diseño5.png",width=120, height=80)
+                    page.update()
+                    return
+            
+        return gallery_img
     
-    gallery_pick=gallery_images
+    gallery_section=ft.Row(controls=[ft.ElevatedButton("←",lambda img_index: img_index-1,page.update()),gallery_images(img_index,gallery_img),ft.ElevatedButton("→",lambda img_index: img_index+1 ,page.update())])
+   
     # Join Section from Code 1
     join_button = ft.ElevatedButton(
         "Join us",
@@ -132,17 +156,28 @@ def main(page: ft.Page):
 
     # Footer from Code 2
     footer_section = ft.Container(
-        content=ft.Column([
-            ft.Text("TALK TO US", size=16, weight=ft.FontWeight.BOLD),
-            ft.Text("(04) 2365 9855 | info@3dhelpers.com"),
-            ft.Row([
-                ft.Text("@3dHelpersRD"),
-                ft.Text("3D Helpers")
-            ])
-        ], alignment=ft.MainAxisAlignment.CENTER),
-        bgcolor="#175ABF",
-        padding=20
-    )
+    content=ft.Row(
+        controls=[
+            ft.Column([
+                ft.Text("TALK TO US", size=16, weight=ft.FontWeight.BOLD),
+                ft.Text("(04) 298 3985 2092 \n+1 209 1092 4095 \n info@3dhelpers.com",weight=ft.FontWeight.BOLD)
+            ]),
+            ft.Column(
+                controls=[
+                    ft.Row(controls=[insta_img, ft.Text("@3dHelpersRD",size=16,weight=ft.FontWeight.BOLD)]),
+                    ft.Row(controls=[face_img, ft.Text("@3dHelpersRD",size=16,weight=ft.FontWeight.BOLD)]),
+                    ft.Row(controls=[logo])
+                ],
+                alignment=ft.MainAxisAlignment.CENTER
+            )
+        ],
+        alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+    ),
+    bgcolor="#175ABF",
+    padding=20
+)
+
+
 
     # Views
     home_view = ft.Container(content=ft.ListView(controls=[
@@ -154,14 +189,14 @@ def main(page: ft.Page):
         title_section,
         description_text,
         key_areas,
-        # gallery_pick,
+        gallery_section,
         footer_section
         
     ], ) ,  
-        expand=True,visible=True,height=600)
+        expand=True,visible=True,height=460)
 
     about_view = ft.Container(content=ft.ListView([about_section,about_Goal,join_section],),  
-        expand=True,visible=False, height=600)
+        expand=True,visible=False, height=460)
 
     # Donation Form from Code 1
     def validate_credit_card(card_number: str) -> bool:
@@ -301,8 +336,8 @@ def main(page: ft.Page):
     padding=20,
     border=ft.border.all(1, "#D3D3D3"),
     border_radius=10,
-    width=350,
-    height=550,  # Increased height to accommodate feedback
+    width=250,
+    height=350,  # Increased height to accommodate feedback
     alignment=ft.alignment.center
 )
     donate_view = ft.Stack([ donation_img,donation_form],  
