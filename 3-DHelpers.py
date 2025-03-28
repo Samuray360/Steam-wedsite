@@ -8,7 +8,7 @@ def main(page: ft.Page):
     page.padding = 0
 
     # Variables from Code 1
-    logo = ft.Image(src="C:/Users/PC/Documents/GitHub/Steam-wedsite/logo(home).png", width=120, height=80)
+    logo = ft.Image(src="logo(home).png", width=120, height=80)
     donation_img = ft.Image(src="Donation_img.png", width=1900, height=950)
     card_number = ft.TextField(label="Card Number",color="black")
     owner_name = ft.TextField(label="Owner Name",color="black")
@@ -20,19 +20,19 @@ def main(page: ft.Page):
     # Home View Components from Code 2
     title_section = ft.Text("Our Work", size=24, weight=ft.FontWeight.BOLD,color="black")
     description_text = ft.Text(
-        "At 3D Helpers, we use technology and design to transform generosity into action.",
+        "At 3D Helpers, we use technology and design to transform generosity into action.\n Our project is built on three key areas: graphic design,robotics, and software development. \nEach of these fields plays a crucial role in our initiative:",
         size=16,color="black"
     )
     key_areas = ft.Column([
-        ft.Text("• Graphic Design - We create visually engaging designs.",color="black"),
-        ft.Text("• Robotics & 3D Printing - Using 3D printing for impact.",color="black"),
-        ft.Text("• Software Development - An online platform for change.",color="black")
+        ft.Text("• Graphic Design -  We create visually engaging designs \nfor our website and promotional materials, ensuring \nour message reaches a wider audience.",color="black"),
+        ft.Text("• Robotics & 3D Printing - Using 3D printing technology, \nwe produce small car models as a token of appreciation for our donors, \nsymbolizing the movement toward change.",color="black"),
+        ft.Text("• Software Development - We have built an intuitive online platform \nwhere people can learn about our mission, contribute to the cause, \nand track our impact.",color="black")
     ])
 
     # Combined Top and Middle Sections
     top_section = ft.Row(
         controls=[
-            ft.Image(src="child_mask.png", width=200, height=200,),
+            ft.Image(src="kid.png", width=200, height=200,),
             ft.Text("Help us make a difference", size=20,color="black")
         ],
         alignment=ft.MainAxisAlignment.CENTER,
@@ -42,19 +42,22 @@ def main(page: ft.Page):
     middle_section = ft.Row(
         controls=[
             ft.Text("Join our mission to create positive change", size=20,color="black"),
-            ft.Image(src="handshake_icon.png", width=200, height=200)
+            ft.Image(src="tierra.png", width=200, height=200)
         ],
         alignment=ft.MainAxisAlignment.CENTER,
         spacing=20
     )
 
     # Gallery from Code 2
-    gallery_images = ft.Row([
-        ft.Image(src="gallery1.png", width=150, height=150),
-        ft.Image(src="gallery2.png", width=150, height=150),
-        ft.Image(src="gallery3.png", width=150, height=150)
-    ], alignment=ft.MainAxisAlignment.CENTER, spacing=10)
-
+    def gallery_images():
+        gallery= ft.Row([
+        ft.Image(src="Diseño1.png", width=150, height=150),
+        ft.Image(src="Diseño2.png", width=150, height=150),
+        ft.Image(src="Diseño3.png", width=150, height=150),
+        ft.Image(src="Diseño4.png", width=150, height=150),
+        ], alignment=ft.MainAxisAlignment.CENTER, spacing=10)
+        return gallery
+    
     # Join Section from Code 1
     join_button = ft.ElevatedButton(
         "Join us",
@@ -165,4 +168,4 @@ def main(page: ft.Page):
     page.add(nav_bar, stack)
     page.update()
 
-ft.app(target=main, view=ft.WEB_BROWSER)
+ft.app(target=main, view=ft.WEB_BROWSER, assets_dir="assets")
