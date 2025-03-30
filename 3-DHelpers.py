@@ -43,21 +43,18 @@ def main(page: ft.Page):
     face_img = ft.Image(src="Facebook.png", width=80, height=40)
     img_index = 1  # Simple integer for gallery
     gallery_img = ft.Image(src="Diseño1.png", width=250, height=300)
-    key_areas_img=ft.Image(src="diseño1",width=200,height=500)
-    
-    
+
     # Home View Components
     title_section = ft.Text("Our Work", size=24, weight=ft.FontWeight.BOLD, color="black")
     description_text = ft.Text(
         "At 3D Helpers, we use technology and design to transform generosity into action.\nOur project is built on three key areas: graphic design, robotics, and software development.",
         size=16, color="black"
     )
-    key_areas = ft.Row(controls=[ft.Column([
+    key_areas = ft.Column([
         ft.Text("• Graphic Design -  We create visually engaging designs \nfor our website and promotional materials, ensuring \nour message reaches a wider audience.",size=16,color="black"),
         ft.Text("• Robotics & 3D Printing - Using 3D printing technology, \nwe produce small car models as a token of appreciation for our donors, \nsymbolizing the movement toward change.",size=16,color="black"),
         ft.Text("• Software Development - We have built an intuitive online platform \nwhere people can learn about our mission, contribute to the cause, \nand track our impact.",size=16,color="black")
-        ]),key_areas_img
-                                 ])
+    ])
     
     title_section = ft.Text("Our Work", size=24, weight=ft.FontWeight.BOLD,color="black")
     description_text = ft.Text(
