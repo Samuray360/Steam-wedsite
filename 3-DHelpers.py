@@ -243,10 +243,10 @@ def main(page: ft.Page):
             ft.Text("Help our Cause by Donating!", size=20, weight=ft.FontWeight.BOLD, color="black"),
             name_field, last_name_field, credit_card_field, cvv_field, amount_field,
             ft.ElevatedButton("Donate", bgcolor="#1E90FF", width=300, height=50, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10),color="white"), on_click=process_donation),
-            ft.Row([ft.Image(src="mastercard_logo.png", width=100, height=80), ft.Image(src="paypal_logo.png", width=100, height=80)], alignment=ft.alignment.center, spacing=10),
+            ft.Row([ft.Image(src="mastercard_logo.png", width=70, height=60), ft.Image(src="paypal_logo.png", width=70, height=60)], alignment=ft.alignment.center, spacing=10),
             feedback_text
         ], alignment=ft.alignment.center, spacing=15),
-        bgcolor="white", padding=20, border=ft.border.all(1, "#D3D3D3"), border_radius=10, width=250, height=550, alignment=ft.alignment.center
+        bgcolor="white", padding=20, border=ft.border.all(1, "#D3D3D3"), border_radius=10, width=min(200,page.width*0.5), height=min(300,page.height*0.7), alignment=ft.alignment.center
     )
     
     about_us_section=ft.Container(content=ft.Row(controls=[ft.Column(controls=[about_title,about_content,join_section])],alignment=ft.alignment.center))
@@ -272,7 +272,7 @@ def main(page: ft.Page):
         expand=True,
         visible=False
     )
-    donate_view = ft.Stack(
+    donate_view =ft.Stack(
         controls=[donation_img, donation_form],
         expand=True,alignment=ft.alignment.center,
         visible=False
