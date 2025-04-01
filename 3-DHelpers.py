@@ -13,15 +13,16 @@ def main(page: ft.Page):
 
     # Responsive resize handler
     def on_resize(e):
-        gallery_img.width = min(120, page.width * 0.7)
-        gallery_img.height = min(80, page.height * 0.6)
-        donation_form.width = min(400, page.width * 0.8)
-        donation_form.height = min(500, page.height * 0.9)
+        # gallery_img.width = min(120, page.width * 0.4)
+        # gallery_img.height = min(80, page.height * 0.6)
+        # donation_form.width = min(350, page.width * 0.3)
+        # donation_form.height = min(400, page.height * 0.7)
         home_bg.width = page.width
         home_bg.height = page.height
         donation_img.width = page.width
         donation_img.height = page.height
         nav_bar.width = page.width  # Ensure nav bar spans full width
+        
         page.update()
 
     page.on_resize = on_resize
@@ -42,36 +43,37 @@ def main(page: ft.Page):
     insta_img = ft.Image(src="insta.png", width=80, height=40)
     face_img = ft.Image(src="Facebook.png", width=80, height=40)
     img_index = 1  # Simple integer for gallery
-    gallery_img = ft.Image(src="Diseño1.png")
+    gallery_img = ft.Image(src="Diseño1.png",width=350,height=450)
     our_work_img=ft.Image(src="diseño1",width=min(400,page.width*0.8),height=min(500,page.height*0.9))
     # Home View Components
     title_section = ft.Text("Our Work", size=24, weight=ft.FontWeight.BOLD, color="black")
     description_text = ft.Text(
-        "At 3D Helpers, we use technology and design to transform generosity into action.\nOur project is built on three key areas: graphic design, robotics, and software development.",
+        "   At 3D Helpers, we use technology and design to transform generosity into action.\nOur project is built on three key areas: graphic design, robotics, and software development.\n\n",
         size=16, color="black"
     )
     key_areas = ft.Column([
-        ft.Text("• Graphic Design -  We create visually engaging designs\nfor our website and promotional materials, ensuring \nour message reaches a wider audience.",size=16,color="black"),
-        ft.Text("• Robotics & 3D Printing - Using 3D printing technology, \nwe produce small car models as a token of appreciation for our donors, \nsymbolizing the movement toward change.",size=16,color="black"),
-        ft.Text("• Software Development - We have built an intuitive online platform \nwhere people can learn about our mission, contribute to the cause, \nand track our impact.",size=16,color="black")
+        ft.Text("   • Graphic Design -  We create visually engaging designs\n for our website and promotional materials, ensuring \n our message reaches a wider audience.",size=16,color="black"),
+        ft.Text("   • Robotics & 3D Printing - Using 3D printing technology, \n we produce small car models as a token of appreciation for our donors, \n symbolizing the movement toward change.",size=16,color="black"),
+        ft.Text("   • Software Development - We have built an intuitive online platform \n where people can learn about our mission, contribute to the cause, \n and track our impact.",size=16,color="black")
     ])
     
     Our_work_section=ft.Container(content=ft.Row(controls=[ft.Column(controls=[title_section,description_text,key_areas]),our_work_img]))
     
-    top_section = ft.Row(
+    top_section = ft.ResponsiveRow(
         controls=[
-            ft.Image(src="kid.png", width=200, height=200,),
-            ft.Text("Help us make a difference", size=20,color="black")
+            ft.Text("\n"),
+            ft.Image(src="kid.png", width=400, height=400,),
+            ft.Text(" At 3D Helpers, we believe in the power of technology to drive meaningful change. \n Our mission is to raise awareness and combat child poverty in the Dominican Republic\n by merging innovation and compassio. Through graphic design, robotics, and software development\n we create a unique experience for donors—each contribution is met with a 3D-printed car, \n a symbol of the movement toward a better future. By supporting our cause, \n you’re not just making a donation; you’re joining a community dedicated to transforming lives and inspiring hope.", size=16,color="black")
         ],
-        alignment=ft.MainAxisAlignment.CENTER,
+        alignment=ft.alignment.center,
         spacing=20,
     )
     middle_section = ft.Row(
         controls=[
-            ft.Text("Join our mission to create positive change", size=20,color="black"),
-            ft.Image(src="tierra.png", width=200, height=200)
+            ft.Text("  Get involved today and help us make a difference! Whether you choose to donate, spread the word, or volunteer your skills,\n every action helps us reach our goal of RD$6,500 to support vulnerable children. \n Explore our website to learn more about our work, meet the team, and see the impact your generosity makes.\n Together, we can drive change—one layer at a time.", size=16,color="black"),
+            ft.Image(src="tierra.png", width=400, height=500)
         ],
-        alignment=ft.MainAxisAlignment.CENTER,
+        alignment=ft.alignment.center,
         spacing=20
     )
     footer_section = ft.Container(
@@ -79,7 +81,7 @@ def main(page: ft.Page):
         controls=[
             ft.Column([
                 ft.Text("TALK TO US", size=16, weight=ft.FontWeight.BOLD),
-                ft.Text("(04) 298 3985 2092 \n+1 209 1092 4095 \n info@3dhelpers.com",weight=ft.FontWeight.BOLD),ft.Text("\n\n")
+                ft.Text("(04) 298 3985 2092 \n +1 209 1092 4095 \n info@3dhelpers.com",weight=ft.FontWeight.BOLD),ft.Text("\n\n")
             ]),
             ft.Column(
                 controls=[
@@ -95,17 +97,18 @@ def main(page: ft.Page):
     bgcolor="#175ABF",
     padding=20
 )
+    
     about_title = ft.Row(
         controls=[
             
-            ft.Text("We are 3D Helpers, an initiative that combines technology and solidarity to create a meaningful impact.\n Our project integrates graphic design, robotics, and software development\n to raise awareness about child poverty in the Dominican Republic. \nThrough our platform, anyone can contribute by making donations, \nwhich are directed to aid institutions and the production of 3D-printed models.\n\nAs a token of appreciation, each donor receives a 3D-printed car, \nsymbolizing the drive toward a better future. With this effort, \nwe aim not only to alleviate poverty but also to inspire more people to be part of the change.", size=16,color="black")
+            ft.Text(" We are 3D Helpers, an initiative that combines technology and solidarity to create a meaningful impact.\n Our project integrates graphic design, robotics, and software development\n to raise awareness about child poverty in the Dominican Republic. \n Through our platform, anyone can contribute by making donations, \n which are directed to aid institutions and the production of 3D-printed models.\n\n As a token of appreciation, each donor receives a 3D-printed car, \n symbolizing the drive toward a better future. With this effort, \n we aim not only to alleviate poverty but also to inspire more people to be part of the change.", size=16,color="black")
             ,ft.Image(src="about_us.png",width=200,height=250)
         ],
         spacing=20
     )
     about_content = ft.Column([ft.Row(
         controls=[
-            ft.Text("At 3D Helpers, our mission is to make a real difference in the fight against child poverty in the Dominican Republic. \nThrough technology and creativity, we strive not only to raise funds but also to increase public awareness of this pressing issue. ", size=16,color="black"),
+            ft.Text(" At 3D Helpers, our mission is to make a real difference in the fight against child poverty in the Dominican Republic. \n Through technology and creativity, we strive not only to raise funds but also to increase public awareness of this pressing issue. ", size=16,color="black"),
             ft.Image(src="ladtop.png", width=200, height=250,)
              ],  
         
@@ -113,19 +116,16 @@ def main(page: ft.Page):
     ), 
             ft.Row(controls=[
                 
-            ft.Text("Our goal is to make a real difference in the fight against child poverty in the Dominican Republic.\n\nThrough technology and creativity, we strive not only to raise funds but also to increase public awareness of this pressing issue.", 
-                    size=16,color="blue"),],spacing=15),
-            ft.Image(src="engranaje.png", width=200, height=250,),
+            ft.Text(" Our goal is to make a real difference in the fight against child poverty in the Dominican Republic.\n\n Through technology and creativity, we strive not only to raise funds but also to increase public awareness of this pressing issue.", 
+                    size=16,color="blue"),ft.Image(src="engranaje.png", width=200, height=250,)],spacing=15),
+            
             
             ft.Row(controls=[
-            ft.Text("Our primary goal is to reach at least RD$6,500 in donations, with 70% \ngoing directly to charitable organizations that support children in vulnerable situations and 30%\n used for the production of 3D-printed models that symbolize our commitment to the cause. With every donation,\n we not only provide aid but also promote innovation and design as powerful tools for social change. ", 
+            ft.Text(" Our primary goal is to reach at least RD$6,500 in donations, with 70% \ngoing directly to charitable organizations that support children in vulnerable situations and 30%\n used for the production of 3D-printed models that symbolize our commitment to the cause. With every donation,\n we not only provide aid but also promote innovation and design as powerful tools for social change. ", 
                     size=16,color="black"),
              ft.Image(src="impresora.png", width=200 ,height=250,),
         ],spacing=40) 
-    ])
-
-    
-
+    ],alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
 
     # Gallery
     def gallery_images(change):
@@ -157,8 +157,29 @@ def main(page: ft.Page):
     def show_about(e): home_view.visible, about_view.visible, donate_view.visible = False, True, False; page.update()
     def show_donate(e): home_view.visible, about_view.visible, donate_view.visible = False, False, True; page.update()
     
+    def to_about_button_style(e:ft.ControlEvent):
+        # if e.data == "true":  # Mouse entered (hover starts)
+        #     to_about_button.style = ft.ButtonStyle(
+        #         bgcolor="white",
+        #         color="#175ABF",
+        #         border=ft.border.all(2, ft.colors.BLUE),
+        #         shape=ft.RoundedRectangleBorder(radius=20)
+        #     )
+        # else:  # Mouse exited (hover ends)
+        #     to_about_button.style = ft.ButtonStyle(
+        #         bgcolor="#175ABF",
+        #         color="white",
+        #         shape=ft.RoundedRectangleBorder(radius=20)
+        #     )
+        to_about_button.style=ft.ButtonStyle(bgcolor="white",color="#175ABF",border=ft.border.all(2, ft.colors.BLUE),shape=ft.RoundedRectangleBorder(radius=20))
+        to_about_button.update()
+
+
+    to_about_button=ft.ElevatedButton("About us",on_click=show_about,on_hover=to_about_button_style,width=300,style=ft.ButtonStyle(bgcolor="#175ABF",color="white",shape=ft.RoundedRectangleBorder(radius=20),padding=10))
+
+
     # Join Section
-    join_button = ft.ElevatedButton("Join us",on_click=show_donate ,bgcolor="#6495ED", color="white", width=120, height=40, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=20)))
+    join_button = ft.ElevatedButton("Join us",on_click=show_donate ,bgcolor="#175ABF", color="white", width=120, height=40, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=20)))
     join_section = ft.Container(content=ft.Stack([bg_image, ft.Column([logo_text, donate_text, join_button],)]))
 
     # Quote Section
@@ -171,12 +192,11 @@ def main(page: ft.Page):
                 color="white"
             ),
             ft.Text("- Ethan Tamarez", size=16, color="white")
-        ], alignment=ft.MainAxisAlignment.CENTER),
+        ], alignment=ft.alignment.center),
         bgcolor="#6495ED",
         padding=20,
         alignment=ft.alignment.center
     )
-
 
     # Donation Form
     def validate_credit_card(card_number: str) -> bool:
@@ -246,7 +266,7 @@ def main(page: ft.Page):
             ft.Row([ft.Image(src="mastercard_logo.png", width=70, height=60), ft.Image(src="paypal_logo.png", width=70, height=60)], alignment=ft.alignment.center, spacing=10),
             feedback_text
         ], alignment=ft.alignment.center, spacing=15),
-        bgcolor="white", padding=20, border=ft.border.all(1, "#D3D3D3"), border_radius=10, width=min(200,page.width*0.5), height=min(300,page.height*0.7), alignment=ft.alignment.center
+        bgcolor="white", padding=20, border=ft.border.all(1, "#D3D3D3"), border_radius=10, width=500, height=600, alignment=ft.alignment.center
     )
     
     about_us_section=ft.Container(content=ft.Row(controls=[ft.Column(controls=[about_title,about_content,join_section])],alignment=ft.alignment.center))
@@ -254,7 +274,7 @@ def main(page: ft.Page):
     # Views with Scroll
     home_view = ft.Container(
         content=ft.ListView(
-            controls=[home_bg, top_section, middle_section, quote_section,Our_work_section, gallery_section, footer_section],
+            controls=[home_bg, top_section, middle_section, quote_section,Our_work_section, gallery_section,to_about_button, footer_section],
             expand=True,
             height=page.height,
         ),
@@ -277,7 +297,6 @@ def main(page: ft.Page):
         expand=True,alignment=ft.alignment.center,
         visible=False
     )
-
 
     nav_buttons = ft.Row([
         ft.ElevatedButton("Home", on_click=show_home, style=ft.ButtonStyle(bgcolor="#175ABF", color="white")),
