@@ -61,8 +61,8 @@ def main(page: ft.Page):
     
     top_section = ft.ResponsiveRow(
         controls=[
-            ft.Text("\n"),
-            ft.Image(src="kid.png", width=400, height=400,),
+            ft.Text("\n",col={6}),
+            ft.Image(src="kid.png", width=400, height=400,col={6}),
             ft.Text(" At 3D Helpers, we believe in the power of technology to drive meaningful change. \n Our mission is to raise awareness and combat child poverty in the Dominican Republic\n by merging innovation and compassio. Through graphic design, robotics, and software development\n we create a unique experience for donors—each contribution is met with a 3D-printed car, \n a symbol of the movement toward a better future. By supporting our cause, \n you’re not just making a donation; you’re joining a community dedicated to transforming lives and inspiring hope.", size=16,color="black")
         ],
         alignment=ft.alignment.center,
