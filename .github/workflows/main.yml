@@ -1,4 +1,4 @@
-name: Web Build + Deployment to GitHub Pages 
+name: Web Build + Deployment to GitHub Pages
 
 on:
   push:
@@ -16,7 +16,7 @@ concurrency:
 env:
   BUILD_NUMBER: 1
   BUILD_VERSION: 1.0.0
-  PYTHON_VERSION: 3.12.8
+  PYTHON_VERSION: 3.12
   FLET_CLI_VERSION: 0.27.5
   PYTHONUTF8: 1
   FLET_CLI_NO_RICH_OUTPUT: 1
@@ -40,23 +40,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install flet-cli==$FLET_CLI_VERSION
 
-    - name: Check Project Files
-      run: |
-        echo "Listing project files..."
-        ls -R
-
-    - name: Verify Flet Installation
-      run: |
-        python -m pip show flet
-
     - name: Flet Build Web
       run: |
-        flet build web --module-name main --base-url Steam-wedsite --route-url-strategy hash
+        flet build web --module-name main --base-url /3D-Helpers/ --route-url-strategy hash
 
     - name: Validate Build Output
       run: |
         if [ -d "build/web" ]; then
           echo "✅ Build directory found!"
+          ls -R build/web
         else
           echo "❌ ERROR: Build directory not found!"
           exit 1
