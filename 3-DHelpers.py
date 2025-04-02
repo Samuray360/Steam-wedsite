@@ -25,10 +25,10 @@ def main(page: ft.Page):
         
         page.update()
 
-    page.on_resize = on_resize
+    page.window.on_event= lambda _: on_resize()
 
     # Variables
-    logo = ft.Image(src="logo(home).png",width=80,height=70)
+    logo = ft.Image(src="logo(home).png",width=120,height=80)
     name_field = ft.TextField(label="Name", width=300, color="black")
     last_name_field = ft.TextField(label="Last Name", width=300, color="black")
     credit_card_field = ft.TextField(label="Credit Card Number", width=300, color="black")
@@ -44,7 +44,7 @@ def main(page: ft.Page):
     face_img = ft.Image(src="Facebook.png", width=80, height=40)
     img_index = 1  # Simple integer for gallery
     gallery_img = ft.Image(src="Diseño1.png",width=350,height=450)
-    our_work_img=ft.Image(src="diseño1.png",width=150,height=200)
+    our_work_img=ft.Image(src="diseño1.png",width=200,height=300)
 
     # Home View Components
     title_section = ft.Text("Our Work", size=24, weight=ft.FontWeight.BOLD, color="black")
@@ -53,12 +53,12 @@ def main(page: ft.Page):
         size=16, color="black"
     )
     key_areas = ft.Column([
-        ft.Text("   • Graphic Design -  We create visually engaging designs\n for our website and promotional materials, ensuring \n our message reaches a wider audience.",size=16,color="black"),
-        ft.Text("   • Robotics & 3D Printing - Using 3D printing technology, \n we produce small car models as a token of appreciation for our donors, \n symbolizing the movement toward change.",size=16,color="black"),
-        ft.Text("   • Software Development - We have built an intuitive online platform \n where people can learn about our mission, contribute to the cause, \n and track our impact.",size=16,color="black")
-    ])
+        ft.Text(" 🔹 Graphic Design -  We create visually engaging designs\n for our website and promotional materials, ensuring \n our message reaches a wider audience.",size=16,color="black"),
+        ft.Text(" 🔹 Robotics & 3D Printing - Using 3D printing technology, \n we produce small car models as a token of appreciation for our donors, \n symbolizing the movement toward change.",size=16,color="black"),
+        ft.Text(" 🔹 Software Development - We have built an intuitive online platform \n where people can learn about our mission, contribute to the cause, \n and track our impact.",size=16,color="black")
+    ],alignment=ft.alignment.center)
     
-    Our_work_section=ft.ResponsiveRow([ft.Row(controls=[ft.Column(controls=[title_section,description_text,key_areas]),our_work_img])],alignment=ft.alignment.center,col=6)
+    Our_work_section=ft.ResponsiveRow([ft.Row(controls=[ft.Column(controls=[title_section,description_text]),our_work_img])],col=6,alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
     
     top_section = ft.ResponsiveRow(
         [ft.Row(controls=[
@@ -106,7 +106,7 @@ def main(page: ft.Page):
         controls=[
             
             ft.Text(" We are 3D Helpers, an initiative that combines technology and solidarity to create a meaningful impact.\n Our project integrates graphic design, robotics, and software development\n to raise awareness about child poverty in the Dominican Republic. \n Through our platform, anyone can contribute by making donations, \n which are directed to aid institutions and the production of 3D-printed models.\n\n As a token of appreciation, each donor receives a 3D-printed car, \n symbolizing the drive toward a better future. With this effort, \n we aim not only to alleviate poverty but also to inspire more people to be part of the change.", size=16,color="black")
-            ,ft.Image(src="about_us.png",width=200,height=250)
+            ,ft.Image(src="about_us.png",width=300,height=450)
         ],
         spacing=8
     )
@@ -114,15 +114,15 @@ def main(page: ft.Page):
     about_content = ft.ResponsiveRow([ft.Column([
         ft.Row(controls=[
             ft.Text(" At 3D Helpers, our mission is to make a real difference\n in the fight against child poverty in the Dominican Republic. \n Through technology and creativity, we strive not only to raise funds\n but also to increase public awareness of this pressing issue. ",
-                     size=16,color="black",),ft.Image(src="ladtop.png", width=200, height=250,)],spacing=5
+                     size=16,color="black",),ft.Image(src="ladtop.png", width=300, height=450,)],spacing=5
                     ), 
         ft.Row(controls=[
                 ft.Text(" Our goal is to make a real difference\n in the fight against child poverty in the Dominican Republic.\n\n Through technology and creativity, we strive not only to raise funds\n but also to increase public awareness of this pressing issue.", 
-                    size=16,color="blue",),ft.Image(src="engranaje.png", width=200, height=250,)],spacing=5
+                    size=16,color="blue",),ft.Image(src="engranaje.png", width=300, height=450,)],spacing=5
                     ),
         ft.Row(controls=[
-            ft.Text(" Our primary goal is to reach at least RD$6,500 in donations, with 70% \n going directly to charitable organizations that support children in vulnerable situations and 30%\n used for the production of 3D-printed models that symbolize our commitment to the cause. With every donation,\n we not only provide aid but also promote innovation and design as powerful tools for social change. ", 
-                    size=16,color="black",),ft.Image(src="impresora.png", width=200 ,height=250,),],spacing=10
+            ft.Text(" Our primary goal is to reach at least RD$6,500 in donations, with 70% \n going directly to charitable organizations that support children in\n vulnerable situations and 30% used for the production of 3D-printed models\n that symbolize our commitment to the cause. With every donation,\n we not only provide aid but also promote innovation and design as powerful \ntools for social change. ", 
+                    size=16,color="black",),ft.Image(src="impresora.png", width=300 ,height=450,),],spacing=10
                     ) 
 
     ],alignment=ft.alignment.center)])
@@ -274,7 +274,7 @@ def main(page: ft.Page):
     # Views with Scroll
     home_view = ft.Container(
         content=ft.ListView(
-            controls=[home_bg, top_section, middle_section, quote_section,Our_work_section, gallery_section,to_about_button, footer_section],
+            controls=[home_bg, top_section, middle_section, quote_section,Our_work_section,key_areas,gallery_section,to_about_button, footer_section],
             expand=True,
             height=page.height,
         ),
