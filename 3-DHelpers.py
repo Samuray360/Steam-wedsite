@@ -83,6 +83,7 @@ def main(page: ft.Page):
     footer_section = ft.Container(
     content=ft.ResponsiveRow([ft.Row(
         controls=[
+
             ft.Column([
                 ft.Text("TALK TO US", size=16, weight=ft.FontWeight.BOLD,col=6),
                 ft.Text("(04) 298 3985 2092 \n +1 209 1092 4095 \n info@3dhelpers.com",weight=ft.FontWeight.BOLD,col=6),ft.Text("\n\n")
@@ -94,9 +95,9 @@ def main(page: ft.Page):
                     ft.Row(controls=[logo]),ft.Text("\n\n")
                 ],
                 alignment=ft.alignment.center
-            )])
+            )],alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
         ],
-        alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+        
     ),
     bgcolor="#175ABF",
     padding=20
@@ -158,25 +159,25 @@ def main(page: ft.Page):
     def show_donate(e): home_view.visible, about_view.visible, donate_view.visible = False, False, True; page.update()
     
     def to_about_button_style(e:ft.ControlEvent):
-        if e.data == "true":  # Mouse entered (hover starts)
-            to_about_button.style = ft.ButtonStyle(
+        if e.data == "true":  # Mouse enters the button (hover starts)
+                to_about_button.style = ft.ButtonStyle(
                 bgcolor="white",
-                color="#175ABF",
-                border=ft.border.all(2, ft.colors.BLUE),
-                shape=ft.RoundedRectangleBorder(radius=20)
-            )
-        else:  # Mouse exited (hover ends)
-            to_about_button.style = ft.ButtonStyle(
+                color="#175ABF",    
+                shape=ft.RoundedRectangleBorder(radius=20),
+                padding=10
+                    )
+        elif e.data == "false":  # Mouse leaves the button (hover ends)
+                to_about_button.style = ft.ButtonStyle(
                 bgcolor="#175ABF",
                 color="white",
-                shape=ft.RoundedRectangleBorder(radius=20)
+                shape=ft.RoundedRectangleBorder(radius=20),
+                padding=10
             )
+        to_about_button.update()           
 
-        # to_about_button.style=ft.ButtonStyle(bgcolor="white",color="#175ABF",border=ft.border.all(2, ft.colors.BLUE),shape=ft.RoundedRectangleBorder(radius=20))
-        to_about_button.update()
-
-    to_about_button=ft.ElevatedButton("About us",on_click=show_about,on_hover=to_about_button_style,width=300,style=ft.ButtonStyle(bgcolor="#175ABF",color="white",shape=ft.RoundedRectangleBorder(radius=20),padding=10))
-
+    to_about_button=ft.ElevatedButton("About us",on_click=show_about,on_hover=to_about_button_style,width=100,style=ft.ButtonStyle(bgcolor="#175ABF",color="white",shape=ft.RoundedRectangleBorder(radius=20),padding=10))
+   
+                
 
     # Join Section
     join_button = ft.ElevatedButton("Join us",on_click=show_donate ,bgcolor="#175ABF", color="white", width=120, height=40, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=20)))
@@ -197,7 +198,6 @@ def main(page: ft.Page):
         padding=20,
         alignment=ft.alignment.center
     )
-
     # Donation Form
     def validate_credit_card(card_number: str) -> bool:
         card_number = re.sub(r'\D', '', card_number)
