@@ -43,7 +43,7 @@ jobs:
     - name: Check Project Files
       run: |
         echo "Listing project files..."
-        ls -la
+        ls -R
 
     - name: Verify Flet Installation
       run: |
@@ -51,7 +51,7 @@ jobs:
 
     - name: Flet Build Web
       run: |
-        flet build web --module-name main --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
+        flet build web --module-name main --base-url Steam-wedsite --route-url-strategy hash
 
     - name: Validate Build Output
       run: |
