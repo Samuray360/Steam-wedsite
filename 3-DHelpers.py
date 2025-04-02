@@ -26,7 +26,7 @@ def main(page: ft.Page):
         
         page.update()
 
-    page.window.on_event= lambda _: on_resize()
+    page.on_event= lambda _: on_resize()
 
     # Variables
     logo = ft.Image(src="logo(home).png",width=120,height=80)
@@ -36,8 +36,8 @@ def main(page: ft.Page):
     cvv_field = ft.TextField(label="CVV", width=300, color="black")
     amount_field = ft.TextField(label="Donation Amount ($)", width=300, color="black")
     feedback_text = ft.Text("", color="green", visible=False)
-    donation_img = ft.Image(src="Donation_img.png", fit=ft.ImageFit.COVER,width=page.width, height=page.height)
-    bg_image = ft.Image(src="Join_bg.png", fit=ft.ImageFit.COVER, expand=True)
+    donation_img = ft.Image(src="Donation_img.png", fit=ft.ImageFit.COVER,)
+    bg_image = ft.Image(src="Join_bg.png", fit=ft.ImageFit.COVER,)
     logo_text = ft.Text("3D Helpers", size=24, color="white", weight=ft.FontWeight.BOLD)
     donate_text = ft.Text("Donate now!", size=48, color="white", weight=ft.FontWeight.BOLD)
     home_bg = ft.Image(src="Home.png",fit=ft.ImageFit.COVER, width=page.width, height=page.height)
@@ -48,18 +48,18 @@ def main(page: ft.Page):
     our_work_img=ft.Image(src="diseño1.png",width=200,height=300)
 
     # Home View Components
-    title_section = ft.Text("Our Work", size=24, weight=ft.FontWeight.BOLD, color="black")
+    title_section = ft.Text(" Our Work", size=24, weight=ft.FontWeight.BOLD, color="black")
     description_text = ft.Text(
-        "   At 3D Helpers, we use technology and design to transform generosity into action.\n Our project is built on three key areas: graphic design, robotics, and software development.\n\n",
+        "  At 3D Helpers, we use technology and design to transform generosity into action.\n Our project is built on three key areas: graphic design, robotics, and software development.\n\n",
         size=16, color="black"
     )
-    key_areas = ft.Column([
+    key_areas = ft.ResponsiveRow([
         ft.Text(" 🔹 Graphic Design -  We create visually engaging designs\n for our website and promotional materials, ensuring \n our message reaches a wider audience.",size=16,color="black"),
         ft.Text(" 🔹 Robotics & 3D Printing - Using 3D printing technology, \n we produce small car models as a token of appreciation for our donors, \n symbolizing the movement toward change.",size=16,color="black"),
         ft.Text(" 🔹 Software Development - We have built an intuitive online platform \n where people can learn about our mission, contribute to the cause, \n and track our impact.",size=16,color="black")
-    ],alignment=ft.alignment.center)
+    ])
     
-    Our_work_section=ft.ResponsiveRow([ft.Row(controls=[ft.Column(controls=[title_section,description_text]),our_work_img])],col=6,alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
+    Our_work_section=ft.ResponsiveRow([ft.Row(controls=[ft.Column(controls=[title_section,description_text]),our_work_img],spacing=500)],col=6,)
     
     top_section = ft.ResponsiveRow(
         [ft.Row(controls=[
@@ -176,7 +176,7 @@ def main(page: ft.Page):
             )
         to_about_button.update()           
 
-    to_about_button=ft.ElevatedButton("About us",on_click=show_about,on_hover=to_about_button_style,width=100,style=ft.ButtonStyle(bgcolor="#175ABF",color="white",shape=ft.RoundedRectangleBorder(radius=20),padding=10))
+    to_about_button=ft.ElevatedButton("About us",width=50,on_click=show_about,on_hover=to_about_button_style,style=ft.ButtonStyle(bgcolor="#175ABF",color="white",shape=ft.RoundedRectangleBorder(radius=20),padding=10))
    
                 
 
@@ -217,7 +217,13 @@ def main(page: ft.Page):
         return checksum % 10 == 0
 
     def process_donation(e):
-        name, last_name, credit_card, cvv, amount = name_field.value, last_name_field.value, credit_card_field.value, cvv_field.value, amount_field.value
+        name, last_name, credit_card, cvv, amount = (
+            name_field.value.strip(),
+            last_name_field.value.strip(),
+            credit_card_field.value,
+            cvv_field.value,
+            amount_field.value
+        )
         if not all([name, last_name, credit_card, cvv, amount]):
             feedback_text.value, feedback_text.color = "Please fill in all fields.", "red"
             feedback_text.visible = True
@@ -243,10 +249,20 @@ def main(page: ft.Page):
             page.update()
             return
 
-        donation_data = {"name": name, "last_name": last_name, "credit_card": credit_card[-4:], "amount": amount_float, "timestamp": str(datetime.datetime.now())}
+        donation_data = {
+            "name": name,
+            "last_name": last_name,
+            "credit_card": credit_card[-4:],
+            "amount": round(amount_float, 2),
+            "timestamp": str(datetime.datetime.now())
+        }
         file_path = "donations.json"
         try:
-            data = json.load(open(file_path, "r")) if os.path.exists(file_path) else []
+            if os.path.exists(file_path):
+                with open(file_path, "r") as f:
+                    data = json.load(f)
+            else:
+                data = []
             data.append(donation_data)
             with open(file_path, "w") as f:
                 json.dump(data, f, indent=4)
@@ -254,7 +270,7 @@ def main(page: ft.Page):
             feedback_text.visible = True
             for field in [name_field, last_name_field, credit_card_field, cvv_field, amount_field]:
                 field.value = ""
-        except Exception as ex:
+        except (json.JSONDecodeError, IOError) as ex:
             feedback_text.value, feedback_text.color = f"Error saving donation: {str(ex)}", "red"
             feedback_text.visible = True
         page.update()
@@ -264,10 +280,10 @@ def main(page: ft.Page):
             ft.Text("Help our Cause by Donating!", size=20, weight=ft.FontWeight.BOLD, color="black"),
             name_field, last_name_field, credit_card_field, cvv_field, amount_field,
             ft.ElevatedButton("Donate", bgcolor="#1E90FF", width=300, height=50, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10),color="white"), on_click=process_donation),
-            ft.Row([ft.Image(src="mastercard_logo.png", width=60, height=60), ft.Image(src="paypal_logo.png", width=60, height=60)], alignment=ft.alignment.center, spacing=10),
+            ft.Row([ft.Image(src="mastercard_logo.png", width=200, height=100), ft.Image(src="paypal_logo.png", width=200, height=100)],alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
             feedback_text
-        ], alignment=ft.alignment.center, spacing=15),
-        bgcolor="white", padding=20, border=ft.border.all(1, "#D3D3D3"), border_radius=10, width=500, height=600, alignment=ft.alignment.center
+        ], spacing=15),
+        bgcolor="white", padding=20, border=ft.border.all(1, "#D3D3D3"), border_radius=10, width=min(500, page.width * 0.8),height=600, alignment=ft.alignment.center
     )
     
     about_us_section=ft.Container(content=ft.Row(controls=[ft.Column(controls=[about_title,about_content,join_section])],alignment=ft.alignment.center))
@@ -275,9 +291,10 @@ def main(page: ft.Page):
     # Views with Scroll
     home_view = ft.Container(
         content=ft.ListView(
-            controls=[home_bg, top_section, middle_section, quote_section,Our_work_section,key_areas,gallery_section,to_about_button, footer_section],
+            controls=[home_bg, top_section, middle_section, quote_section,Our_work_section,key_areas,gallery_section,to_about_button,footer_section],
             expand=True,
             height=page.height,
+            width=page.width
         ),
         expand=True,
         visible=True
@@ -295,6 +312,8 @@ def main(page: ft.Page):
     )
     donate_view =ft.Stack(
         controls=[donation_img, donation_form],
+        width=page.width,
+        height=page.height,
         expand=True,alignment=ft.alignment.center,
         visible=False
     )
@@ -303,12 +322,12 @@ def main(page: ft.Page):
         ft.ElevatedButton("Home", on_click=show_home, style=ft.ButtonStyle(bgcolor="#175ABF", color="white")),
         ft.ElevatedButton("About", on_click=show_about, style=ft.ButtonStyle(bgcolor="#175ABF", color="white")),
         ft.ElevatedButton("Donate", on_click=show_donate, style=ft.ButtonStyle(bgcolor="#175ABF", color="white")),
-        ft.Text("")
     
-    ], spacing=10, wrap=True)  # Wrap buttons on small screens
-    nav_controls=ft.Row(controls=[logo, nav_buttons],alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
+    ], spacing=15, wrap=True)
+    
+    nav_controls=ft.Row(controls=[logo, nav_buttons],alignment=ft.MainAxisAlignment.SPACE_BETWEEN,expand=True)
 
-    nav_bar = ft.Container(content=ft.ResponsiveRow(controls=[nav_controls],col=6),bgcolor="#175ABF")
+    nav_bar = ft.Container(content=ft.ResponsiveRow(controls=[nav_controls],col=6),bgcolor="#175ABF",padding=0)
 
     
     # Assemble Page
