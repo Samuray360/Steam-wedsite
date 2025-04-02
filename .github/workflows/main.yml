@@ -11,11 +11,9 @@ on:
     branches:
       - main
 
-  # Allows you to run this workflow manually from the Actions tab of the repository
+  # Allows manual workflow runs
   workflow_dispatch:
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -28,16 +26,16 @@ env:
   # Python version to use
   PYTHON_VERSION: 3.12.8
 
-  # flet-cli version to install for `flet build`
+  # flet-cli version to install
   FLET_CLI_VERSION: 0.27.5
 
-  # Ensures Python uses UTF-8 encoding by default
+  # UTF-8 encoding
   PYTHONUTF8: 1
 
-  # Disables rich text formatting in Flet CLI output
+  # Disable rich output in Flet CLI
   FLET_CLI_NO_RICH_OUTPUT: 1
 
-  # Disables progress bars when using UV
+  # Disable progress bars when using UV
   UV_NO_PROGRESS: 1
 
 jobs:
@@ -49,7 +47,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Python ${{ env.PYTHON_VERSION }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4  # Upgraded from v2 to v4
       with:
         python-version: ${{ env.PYTHON_VERSION }}
 
@@ -58,28 +56,40 @@ jobs:
         python -m pip install --upgrade pip
         pip install flet-cli==$FLET_CLI_VERSION
 
+    - name: Verify Project Structure
+      run: |
+        echo "Checking project files..."
+        ls -la
+
     - name: Flet Build Web
       run: |
         echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}, PROJECT_BASE_URL: ${GITHUB_REPOSITORY#*/}"
-        flet build web --module-name main--base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
+        flet build web --module-name main --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash  # Fixed spacing issue
+
+    - name: Validate Build Output
+      run: |
+        if [ -d "build/web" ]; then
+          echo "✅ Build directory found!"
+        else
+          echo "❌ ERROR: Build directory not found!"
+          exit 1
+        fi
 
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        name: web-build-artifact  # the name of the artifact
+        name: web-build-artifact
         path: build/web
 
   deploy:
-    needs: build  # wait for the "build" job to get done before executing this "deploy" job
+    needs: build
 
     runs-on: ubuntu-latest
 
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write
+      id-token: write
 
-    # Deploy to the github-pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -89,7 +99,7 @@ jobs:
         uses: actions/configure-pages@v5
         
       - name: Deploy to GitHub Pages 🚀
-        if: github.event_name == 'push'  # deploy only on push
+        if: github.event_name == 'push'  
         id: deployment
         uses: actions/deploy-pages@v4.0.5
         with:
