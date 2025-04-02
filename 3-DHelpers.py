@@ -182,7 +182,7 @@ def main(page: ft.Page):
 
     # Join Section
     join_button = ft.ElevatedButton("Join us",on_click=show_donate ,bgcolor="#175ABF", color="white", width=120, height=40, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=20)))
-    join_section = ft.Container(content=ft.Stack([bg_image, ft.Column([logo_text, donate_text, join_button],)],alignment=ft.alignment.center,width=page.width))
+    join_section = ft.Container(content=ft.Stack([bg_image, ft.Column([logo_text, donate_text, join_button],)],width=page.width))
 
     # Quote Section
     quote_section = ft.Container(
