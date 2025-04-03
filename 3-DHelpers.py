@@ -18,10 +18,11 @@ def main(page: ft.Page):
         home_bg.height = page.height
         donation_img.width = page.width
         donation_img.height = page.height
-        gallery_img.width = min(350, page.width * 0.4)
+        gallery_img.width = min(350, page.width * 0.9 if page.width < 600 else page.width * 0.4)
         gallery_img.height = min(450, page.height * 0.6)
-        our_work_img.width = min(200, page.width * 0.25)
+        our_work_img.width = min(200, page.width * 0.9 if page.width < 600 else page.width * 0.25)
         our_work_img.height = min(300, page.height * 0.4)
+
         
         # Containers and forms
         nav_bar.width = page.width
@@ -37,6 +38,11 @@ def main(page: ft.Page):
         donate_view.width = page.width
         donate_view.height = page.height
         
+        title_section.size = 24 if page.width > 600 else 18
+        description_text.size = 16 if page.width > 600 else 12
+        for text in key_areas.controls: text.size = 16 if page.width > 600 else 12
+        donate_text.size = 48 if page.width > 600 else 24
+        logo_text.size = 24 if page.width > 600 else 18
         page.update()
 
     # page.on_resize = on_resize  # Changed from on_event to on_resize
@@ -130,22 +136,55 @@ def main(page: ft.Page):
         spacing=8
     )
     
-    about_content = ft.ResponsiveRow([ft.Column([
-        ft.Row(controls=[
-            ft.Text(" At 3D Helpers, our mission is to make a real difference\n in the fight against child poverty in the Dominican Republic. \n Through technology and creativity, we strive not only to raise funds\n but also to increase public awareness of this pressing issue. ",
-                     size=16,color="black",),ft.Image(src="ladtop.png", width=300, height=450,)],spacing=5
-                    ), 
-        ft.Row(controls=[
-                ft.Text(" Our goal is to make a real difference\n in the fight against child poverty in the Dominican Republic.\n\n Through technology and creativity, we strive not only to raise funds\n but also to increase public awareness of this pressing issue.", 
-                    size=16,color="blue",),ft.Image(src="engranaje.png", width=300, height=450,)],spacing=5
+    about_content = ft.ResponsiveRow(
+        controls=[
+            ft.Column(
+                controls=[
+                    ft.Row(
+                        controls=[
+
+                            ft.Text(
+                            " At 3D Helpers, our mission is to make a real difference\n in the fight against child poverty in the Dominican Republic. \n Through technology and creativity, we strive not only to raise funds\n but also to increase public awareness of this pressing issue.",
+                            size=16,
+                            color="black",
+                            ),
+                            ft.Image(src="ladtop.png", width=300, height=450),
+                        ],
+                        spacing=80,
+                        alignment=ft.alignment.center,
                     ),
-        ft.Row(controls=[
-            ft.Text(" Our primary goal is to reach at least RD$6,500 in donations, with 70% \n going directly to charitable organizations that support children in\n vulnerable situations and 30% used for the production of 3D-printed models\n that symbolize our commitment to the cause. With every donation,\n we not only provide aid but also promote innovation and design as powerful \ntools for social change. ", 
-                    size=16,color="black",),ft.Image(src="impresora.png", width=300 ,height=450,),],spacing=10
-                    ) 
+                    ft.Row(
+                        controls=[
+                            ft.Text(
+                            " Our goal is to make a real difference\n in the fight against child poverty in the Dominican Republic.\n\n Through technology and creativity, we strive not only to raise funds\n but also to increase public awareness of this pressing issue.",
+                            size=16,
+                            color="blue",
+                            ),
+                            ft.Image(src="engranaje.png", width=300, height=450),
+                        ],
+                        spacing=80,
+                        alignment=ft.alignment.center,
+                    ),
+                    ft.Row(
+                        controls=[
+                            ft.Text(
+                            " Our primary goal is to reach at least RD$6,500 in donations, with 70% \n going directly to charitable organizations that support children in\n vulnerable situations and 30% used for the production of 3D-printed models\n that symbolize our commitment to the cause. With every donation,\n we not only provide aid but also promote innovation and design as powerful \ntools for social change.",
+                            size=16,
+                            color="black",
+                            ),
+                            ft.Image(src="impresora.png", width=300, height=450),
+                        ],
+                        spacing=80,
+                        alignment=ft.alignment.center,
+                    ),
+                ],
+                alignment=ft.alignment.center,
+            )
+        ],
+        alignment=ft.alignment.center,
+        expand=True,
 
-    ],alignment=ft.alignment.center)])
-
+    )
     # Gallery
     def gallery_images(change):
         nonlocal img_index
