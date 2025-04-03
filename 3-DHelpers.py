@@ -14,27 +14,44 @@ def main(page: ft.Page):
 
     # Responsive resize handler
     def on_resize(e):
-        # gallery_img.width = min(120, page.width * 0.4)
-        # gallery_img.height = min(80, page.height * 0.6)
-        # donation_form.width = min(350, page.width * 0.3)
-        # donation_form.height = min(400, page.height * 0.7)
         home_bg.width = page.width
         home_bg.height = page.height
         donation_img.width = page.width
         donation_img.height = page.height
-        nav_bar.width = page.width  # Ensure nav bar spans full width
+        gallery_img.width = min(350, page.width * 0.4)
+        gallery_img.height = min(450, page.height * 0.6)
+        our_work_img.width = min(200, page.width * 0.25)
+        our_work_img.height = min(300, page.height * 0.4)
+        
+        # Containers and forms
+        nav_bar.width = page.width
+        donation_form.width = min(300, page.width * 0.3)
+        donation_form.height=min(600,page.width*0.4)
+        join_section.width = page.width
+        
+        # Views
+        home_view.width = page.width
+        home_view.height = page.height
+        about_view.width = page.width
+        about_view.height = page.height
+        donate_view.width = page.width
+        donate_view.height = page.height
         
         page.update()
+
+    # page.on_resize = on_resize  # Changed from on_event to on_resize
 
     page.on_event= lambda _: on_resize()
 
     # Variables
     logo = ft.Image(src="logo(home).png",width=120,height=80)
-    name_field = ft.TextField(label="Name", width=300, color="black")
-    last_name_field = ft.TextField(label="Last Name", width=300, color="black")
-    credit_card_field = ft.TextField(label="Credit Card Number", width=300, color="black")
-    cvv_field = ft.TextField(label="CVV", width=300, color="black")
-    amount_field = ft.TextField(label="Donation Amount ($)", width=300, color="black")
+
+    name_field = ft.TextField(label="Name", width=250,height=40, color="black")
+    last_name_field = ft.TextField(label="Last Name", width=250,height=40, color="black")
+    credit_card_field = ft.TextField(label="Credit Card Number", width=250,height=40, color="black")
+    cvv_field = ft.TextField(label="CVV", width=250,height=40,color="black")
+    amount_field = ft.TextField(label="Donation Amount ($)", width=250,height=40,color="black")
+
     feedback_text = ft.Text("", color="green", visible=False)
     donation_img = ft.Image(src="Donation_img.png", fit=ft.ImageFit.COVER,)
     bg_image = ft.Image(src="Join_bg.png", fit=ft.ImageFit.COVER,)
@@ -178,8 +195,6 @@ def main(page: ft.Page):
 
     to_about_button=ft.ElevatedButton("About us",width=50,on_click=show_about,on_hover=to_about_button_style,style=ft.ButtonStyle(bgcolor="#175ABF",color="white",shape=ft.RoundedRectangleBorder(radius=20),padding=10))
    
-                
-
     # Join Section
     join_button = ft.ElevatedButton("Join us",on_click=show_donate ,bgcolor="#175ABF", color="white", width=120, height=40, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=20)))
     join_section = ft.Container(content=ft.Stack([bg_image, ft.Column([logo_text, donate_text, join_button],)],width=page.width))
@@ -276,15 +291,27 @@ def main(page: ft.Page):
         page.update()
 
     donation_form = ft.Container(
-        content=ft.ResponsiveRow([
-            ft.Text("Help our Cause by Donating!", size=20, weight=ft.FontWeight.BOLD, color="black"),
-            name_field, last_name_field, credit_card_field, cvv_field, amount_field,
-            ft.ElevatedButton("Donate", bgcolor="#1E90FF", width=300, height=50, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10),color="white"), on_click=process_donation),
-            ft.Row([ft.Image(src="mastercard_logo.png", width=200, height=100), ft.Image(src="paypal_logo.png", width=200, height=100)],alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-            feedback_text
-        ], spacing=15),
-        bgcolor="white", padding=20, border=ft.border.all(1, "#D3D3D3"), border_radius=10, width=min(500, page.width * 0.8),height=600, alignment=ft.alignment.center
-    )
+        content=ft.Column(
+            controls=[
+                ft.Text("Help our Cause by Donating!", size=16, weight=ft.FontWeight.BOLD, color="black"),
+                name_field,
+                last_name_field,
+                credit_card_field,
+                cvv_field,
+                amount_field,
+                ft.ElevatedButton("Donate", bgcolor="#1E90FF", width=250, height=50, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10), color="white"), on_click=process_donation),
+                ft.Row([ft.Image(src="mastercard_logo.png", width=100, height=80), ft.Image(src="paypal_logo.png", width=100, height=80)]),
+                feedback_text
+            ],
+            spacing=5,
+            auto_scroll=False
+        ),
+        bgcolor="white",
+        padding=20,
+        border=ft.border.all(1, "#D3D3D3"),
+        border_radius=10,
+        alignment=ft.alignment.center,
+            )
     
     about_us_section=ft.Container(content=ft.Row(controls=[ft.Column(controls=[about_title,about_content,join_section])],alignment=ft.alignment.center))
     
@@ -323,15 +350,20 @@ def main(page: ft.Page):
         ft.ElevatedButton("About", on_click=show_about, style=ft.ButtonStyle(bgcolor="#175ABF", color="white")),
         ft.ElevatedButton("Donate", on_click=show_donate, style=ft.ButtonStyle(bgcolor="#175ABF", color="white")),
     
-    ], spacing=15, wrap=True)
+    ], spacing=15, wrap=True,alignment=ft.MainAxisAlignment.END, 
+        vertical_alignment=ft.CrossAxisAlignment.CENTER,    )
     
-    nav_controls=ft.Row(controls=[logo, nav_buttons],alignment=ft.MainAxisAlignment.SPACE_BETWEEN,expand=True)
+    nav_controls=ft.Row(controls=[logo, nav_buttons],alignment=ft.MainAxisAlignment.SPACE_BETWEEN,expand=True,height=80)
 
-    nav_bar = ft.Container(content=ft.ResponsiveRow(controls=[nav_controls],col=6),bgcolor="#175ABF",padding=0)
+    nav_bar = ft.Container(content=ft.ResponsiveRow(controls=[nav_controls],col=6),bgcolor="#175ABF",padding=ft.padding.symmetric(vertical=0,horizontal=20),height=80,margin=0)
 
     
     # Assemble Page
-    page.add(nav_bar, ft.Stack([home_view, about_view, donate_view]))
+    page.add(ft.Column([  # Wrap in Column to ensure tight stacking
+            nav_bar,
+            ft.Stack([home_view, about_view, donate_view])
+        ], spacing=0)
+    )
     on_resize(None)  # Initial resize
     page.update()
 
