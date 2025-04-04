@@ -3,7 +3,7 @@ import re
 import json
 import os
 import datetime
-
+#https://flet.dev/docs/controls/responsiverow/#run_spacing
 #https://www.youtube.com/watch?v=qjHgRwQHD3s
 def main(page: ft.Page):
     page.title = "3D-Helpers"
@@ -42,7 +42,7 @@ def main(page: ft.Page):
         description_text.size = 16 if page.width > 600 else 12
         for text in key_areas.controls: text.size = 16 if page.width > 600 else 12
         donate_text.size = 48 if page.width > 600 else 24
-        logo_text.size = 40 if page.width > 600 else 18
+        logo_text.size = 24 if page.width > 600 else 18
         page.update()
 
     # page.on_resize = on_resize  # Changed from on_event to on_resize
@@ -57,16 +57,17 @@ def main(page: ft.Page):
     credit_card_field = ft.TextField(label="Credit Card Number", width=250,height=40, color="black")
     cvv_field = ft.TextField(label="CVV", width=250,height=40,color="black")
     amount_field = ft.TextField(label="Donation Amount ($)", width=250,height=40,color="black")
+
     feedback_text = ft.Text("", color="green", visible=False)
     donation_img = ft.Image(src="Donation_img.png", fit=ft.ImageFit.COVER,)
-    bg_image = ft.Image(src="Join_bg.png", fit=ft.ImageFit.COVER,width=page.width)
+    bg_image = ft.Image(src="Join_bg.png", fit=ft.ImageFit.COVER,)
     logo_text = ft.Text("3D Helpers", size=24, color="white", weight=ft.FontWeight.BOLD)
-    donate_text = ft.Text("Donate now!", size=120, color="white", weight=ft.FontWeight.BOLD)
+    donate_text = ft.Text("Donate now!", size=48, color="white", weight=ft.FontWeight.BOLD)
     home_bg = ft.Image(src="Home.png",fit=ft.ImageFit.COVER, width=page.width, height=page.height)
     insta_img = ft.Image(src="insta.png", width=80, height=40)
     face_img = ft.Image(src="Facebook.png", width=80, height=40)
     img_index = 1  # Simple integer for gallery
-    gallery_img = ft.Image(src="diseño1.png",width=350,height=450)
+    gallery_img = ft.Image(src="Diseño1.png",width=350,height=450)
     our_work_img=ft.Image(src="diseño1.png",width=200,height=300)
 
     # Home View Components
@@ -79,10 +80,9 @@ def main(page: ft.Page):
         ft.Text(" 🔹 Graphic Design -  We create visually engaging designs\n for our website and promotional materials, ensuring \n our message reaches a wider audience.",size=16,color="black"),
         ft.Text(" 🔹 Robotics & 3D Printing - Using 3D printing technology, \n we produce small car models as a token of appreciation for our donors, \n symbolizing the movement toward change.",size=16,color="black"),
         ft.Text(" 🔹 Software Development - We have built an intuitive online platform \n where people can learn about our mission, contribute to the cause, \n and track our impact.",size=16,color="black")
-        ,ft.Text("\n")
     ])
     
-    Our_work_section=ft.ResponsiveRow([ft.Row(controls=[ft.Column(controls=[title_section,description_text]),ft.Image(src="carronegro.png",width=350,height=350)],spacing=300)],col=6,)
+    Our_work_section=ft.ResponsiveRow([ft.Row(controls=[ft.Column(controls=[title_section,description_text]),our_work_img],spacing=500)],col=6,)
     
     top_section = ft.ResponsiveRow(
         [ft.Row(controls=[
@@ -129,11 +129,11 @@ def main(page: ft.Page):
     
     about_title = ft.Row(
         controls=[
-            ft.Text(""),
+            
             ft.Text(" We are 3D Helpers, an initiative that combines technology and solidarity to create a meaningful impact.\n Our project integrates graphic design, robotics, and software development\n to raise awareness about child poverty in the Dominican Republic. \n Through our platform, anyone can contribute by making donations, \n which are directed to aid institutions and the production of 3D-printed models.\n\n As a token of appreciation, each donor receives a 3D-printed car, \n symbolizing the drive toward a better future. With this effort, \n we aim not only to alleviate poverty but also to inspire more people to be part of the change.", size=16,color="black")
-            ,ft.Image(src="about_us.png",width=300,height=430)
+            ,ft.Image(src="about_us.png",width=300,height=450)
         ],
-        spacing=100
+        spacing=8
     )
     
     about_content = ft.ResponsiveRow(
@@ -142,44 +142,39 @@ def main(page: ft.Page):
                 controls=[
                     ft.Row(
                         controls=[
-                            ft.Text(""),
-                            ft.Text(""),
+
                             ft.Text(
                             " At 3D Helpers, our mission is to make a real difference\n in the fight against child poverty in the Dominican Republic. \n Through technology and creativity, we strive not only to raise funds\n but also to increase public awareness of this pressing issue.",
                             size=16,
                             color="black",
-                                ),
-                            ft.Image(src="gente.webp", width=300, height=430),
+                            ),
+                            ft.Image(src="ladtop.png", width=300, height=450),
                         ],
-                        spacing=100,
+                        spacing=80,
                         alignment=ft.alignment.center,
                     ),
                     ft.Row(
                         controls=[
-                            ft.Text(""),
-                            ft.Text(""),
                             ft.Text(
                             " Our goal is to make a real difference\n in the fight against child poverty in the Dominican Republic.\n\n Through technology and creativity, we strive not only to raise funds\n but also to increase public awareness of this pressing issue.",
                             size=16,
                             color="blue",
                             ),
-                            ft.Image(src="engranaje.png", width=300, height=430),
+                            ft.Image(src="engranaje.png", width=300, height=450),
                         ],
-                        spacing=100,
+                        spacing=80,
                         alignment=ft.alignment.center,
                     ),
                     ft.Row(
                         controls=[
-                            ft.Text(""),
-                            ft.Text(""),
                             ft.Text(
                             " Our primary goal is to reach at least RD$6,500 in donations, with 70% \n going directly to charitable organizations that support children in\n vulnerable situations and 30% used for the production of 3D-printed models\n that symbolize our commitment to the cause. With every donation,\n we not only provide aid but also promote innovation and design as powerful \ntools for social change.",
                             size=16,
                             color="black",
                             ),
-                            ft.Image(src="impresora.png", width=300, height=430),
+                            ft.Image(src="impresora.png", width=300, height=450),
                         ],
-                        spacing=100,
+                        spacing=80,
                         alignment=ft.alignment.center,
                     ),
                 ],
@@ -195,8 +190,8 @@ def main(page: ft.Page):
         nonlocal img_index
         img_index += change
         if img_index < 1:
-            img_index = 8
-        elif img_index > 8:
+            img_index = 5
+        elif img_index > 5:
             img_index = 1
         match img_index:
             case 1: gallery_img.src = "Diseño1.png"
@@ -204,9 +199,6 @@ def main(page: ft.Page):
             case 3: gallery_img.src = "Diseño3.png"
             case 4: gallery_img.src = "Diseño4.png"
             case 5: gallery_img.src = "Diseño5.png"
-            case 6: gallery_img.src = "carroblanco.png"
-            case 7: gallery_img.src = "carrorojo.png"
-            case 8: gallery_img.src = "ferrari.png"
         page.update()
 
     gallery_section = ft.Row(
@@ -240,11 +232,11 @@ def main(page: ft.Page):
             )
         to_about_button.update()           
 
-    to_about_button=ft.Row([ft.ElevatedButton("About us",on_click=show_about,on_hover=to_about_button_style,width=200,height=50,style=ft.ButtonStyle(bgcolor="#175ABF",color="white",shape=ft.RoundedRectangleBorder(radius=20),padding=10))])
+    to_about_button=ft.ElevatedButton("About us",width=50,on_click=show_about,on_hover=to_about_button_style,style=ft.ButtonStyle(bgcolor="#175ABF",color="white",shape=ft.RoundedRectangleBorder(radius=20),padding=10))
    
     # Join Section
-    join_button = ft.ElevatedButton("Join us",on_click=show_donate, width=200, height=60, style=ft.ButtonStyle(bgcolor="#175ABF", color="white",shape=ft.RoundedRectangleBorder(radius=20)))
-    join_section = ft.Stack(controls=[bg_image, ft.Column([logo_text, donate_text, join_button],)],expand=True,alignment=ft.alignment.center)
+    join_button = ft.ElevatedButton("Join us",on_click=show_donate ,bgcolor="#175ABF", color="white", width=120, height=40, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=20)))
+    join_section = ft.Container(content=ft.Stack([bg_image, ft.Column([logo_text, donate_text, join_button],)],width=page.width))
 
     # Quote Section
     quote_section = ft.Container(
@@ -365,19 +357,20 @@ def main(page: ft.Page):
     # Views with Scroll
     home_view = ft.Container(
         content=ft.ListView(
-            controls=[home_bg, top_section, middle_section, quote_section,Our_work_section,key_areas,to_about_button,gallery_section,footer_section],
-            visible=True,
-            
+            controls=[home_bg, top_section, middle_section, quote_section,Our_work_section,key_areas,gallery_section,to_about_button,footer_section],
+            expand=True,
+            height=page.height,
+            width=page.width
         ),
         expand=True,
-        
+        visible=True
     )
     about_view = ft.Container(
         content=ft.ListView(
             controls=[about_us_section],
             expand=True,
             spacing=10,
-            
+            height=page.height,
             
         ),
         expand=True,
@@ -385,7 +378,8 @@ def main(page: ft.Page):
     )
     donate_view =ft.Stack(
         controls=[donation_img, donation_form],
-        
+        width=page.width,
+        height=page.height,
         expand=True,alignment=ft.alignment.center,
         visible=False
     )
