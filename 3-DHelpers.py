@@ -198,7 +198,7 @@ def main(page: ft.Page):
             img_index = 8
         elif img_index > 8:
             img_index = 1
-        match img_index:
+        match img_index :
             case 1: gallery_img.src = "Diseño1.png"
             case 2: gallery_img.src = "Diseño2.png"
             case 3: gallery_img.src = "Diseño3.png"
