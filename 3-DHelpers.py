@@ -4,15 +4,6 @@ import json
 import os
 import datetime
 
-    # explicacion del algoritmo de lunh
-    
-# Desde la derecha, toma todos los dígitos en posiciones pares (0-index, desde la derecha) y dóblalos (multiplícalos por 2).
-
-# Si al doblar un número obtienes algo mayor a 9 (por ejemplo, 2 × 7 = 14), súmale sus dígitos (14 → 1 + 4 = 5).
-
-# Suma todos los dígitos transformados (los doblados con ajustes) y los que no se doblaron.
-
-# Si el total es múltiplo de 10, entonces el número es válido según Luhn.
 #https://www.youtube.com/watch?v=qjHgRwQHD3s
 def main(page: ft.Page):
     page.title = "3D-Helpers"
@@ -421,4 +412,4 @@ def main(page: ft.Page):
     on_resize(None)  # Initial resize
     page.update()
 
-ft.app(target=main, view=ft.WEB_BROWSER, assets_dir="assets", port=3000)
+ft.app(target=main, view=ft.WEB_BROWSER, assets_dir="assets")
